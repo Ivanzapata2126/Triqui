@@ -4,17 +4,31 @@
  */
 package com.universidad.triqui;
 
+import java.awt.Color;
+import java.util.Enumeration;
+import javax.swing.AbstractButton;
+import javax.swing.ButtonGroup;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
+
 /**
  *
  * @author USUARIO
  */
 public class NewGame extends javax.swing.JFrame {
-
+    public static String j1;
+    public static String j2;
+    public static String icono1;
+    public static String icono2;
     /**
      * Creates new form NewGame
      */
     public NewGame() {
         initComponents();
+        this.setLocationRelativeTo(this);
+        jRadioButton3.setEnabled(false);
+        jRadioButton4.setEnabled(false);
     }
 
     /**
@@ -43,20 +57,23 @@ public class NewGame extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Nombre del jugador 2:");
+        jLabel1.setText("Nombre del jugador:");
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Nombre del jugador 1:");
+        jLabel2.setText("Nombre del jugador:");
 
         jLabel3.setFont(new java.awt.Font("Andalus", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("NUEVO JUEGO");
+
+        jTextField1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
         jugador1.add(jRadioButton1);
         jRadioButton1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -68,7 +85,7 @@ public class NewGame extends javax.swing.JFrame {
             }
         });
 
-        jugador2.add(jRadioButton2);
+        jugador1.add(jRadioButton2);
         jRadioButton2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jRadioButton2.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton2.setText("O");
@@ -82,7 +99,7 @@ public class NewGame extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Jugar con:");
 
-        jugador1.add(jRadioButton3);
+        jugador2.add(jRadioButton3);
         jRadioButton3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jRadioButton3.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton3.setText("X");
@@ -96,6 +113,7 @@ public class NewGame extends javax.swing.JFrame {
         jRadioButton4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jRadioButton4.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton4.setText("O");
+        jRadioButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jRadioButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton4ActionPerformed(evt);
@@ -143,11 +161,11 @@ public class NewGame extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jRadioButton1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButton4))
+                                .addComponent(jRadioButton2))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jRadioButton3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButton2))))
+                                .addComponent(jRadioButton4))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(68, 68, 68)
                         .addComponent(jButton2)))
@@ -174,13 +192,13 @@ public class NewGame extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton4))
+                    .addComponent(jRadioButton2))
                 .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jRadioButton3)
-                    .addComponent(jRadioButton2))
+                    .addComponent(jRadioButton4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -210,28 +228,79 @@ public class NewGame extends javax.swing.JFrame {
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
         // TODO add your handling code here:
+        if(getSelectedButtonText(jugador1) == "X"){
+            jRadioButton4.setEnabled(true);
+            jRadioButton4.setSelected(true);
+        }
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
         // TODO add your handling code here:
+        if(getSelectedButtonText(jugador1) == "O"){
+            jRadioButton3.setEnabled(true);
+            jRadioButton3.setSelected(true);
+        }
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
         // TODO add your handling code here:
+        if(getSelectedButtonText(jugador1) == "X"){
+            jRadioButton4.setSelected(true);
+        }
     }//GEN-LAST:event_jRadioButton3ActionPerformed
 
     private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
         // TODO add your handling code here:
+        if(getSelectedButtonText(jugador1) == "O"){
+            jRadioButton3.setSelected(true);
+        }
     }//GEN-LAST:event_jRadioButton4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    public String seleccionIcono(javax.swing.ButtonGroup jugador1){
+        Enumeration<AbstractButton> btnGrp = jugador1.getElements();
+        String resultado = "";
+        while(btnGrp.hasMoreElements()){
+        JRadioButton btnAux = (JRadioButton)btnGrp.nextElement();
+        if(btnAux.isSelected()){
+            resultado = btnAux.getText();
+        }
+    }
+    return resultado;
+ }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        String n1 = jTextField1.getText();
+        String n2 = jTextField2.getText();
+        if(n1.isEmpty() || n2.isEmpty() ){
+            JOptionPane.showMessageDialog(null,"Usted no ingresó nada");
+        }else if(!jRadioButton1.isSelected() && !jRadioButton2.isSelected()){
+            JOptionPane.showMessageDialog(null,"Seleccione los iconos");
+        }else{
+            j1 = n1;
+            j2 = n2;
+            icono1 = seleccionIcono(jugador1);
+            icono2 = seleccionIcono(jugador2);
+            new Board().setVisible(true);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    /**
+     *
+     * @param buttonGroup
+     * @return
+     */
+    public String getSelectedButtonText(ButtonGroup buttonGroup) {
+        for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements();) {
+            AbstractButton button = buttons.nextElement();
+            if (button.isSelected()) {
+                return button.getText();
+            }
+        }
+        return null;
+    }
     /**
      * @param args the command line arguments
      */
