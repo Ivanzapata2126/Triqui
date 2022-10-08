@@ -4,6 +4,7 @@
  */
 package com.universidad.triqui;
 
+import static com.universidad.triqui.Connection_DB.conectar;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -19,8 +20,10 @@ public class Home extends javax.swing.JFrame {
      */
     public Home() {
         initComponents();
+        Connection_DB d = new Connection_DB();
         this.setLocationRelativeTo(this);
         setImageLabel(jLabel2,"src\\main\\java\\images\\logo2.png");
+        conectar();
     }
 
     /**
@@ -131,6 +134,7 @@ public class Home extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        new Ranking().setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
     private void setImageLabel(javax.swing.JLabel labelName,String root){
         ImageIcon image = new ImageIcon(root);

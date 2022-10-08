@@ -5,10 +5,8 @@
 package com.universidad.triqui;
 
 import java.awt.Color;
-import java.awt.Image;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,11 +15,14 @@ import javax.swing.JLabel;
 public class Board extends javax.swing.JFrame {
     String turno = "X";
     int contadorX = 0;
+    boolean hayGanador = false;
     int contadorO = 0;
     int contadorEmpate = 0;
     int contadorPartida = 1;
     boolean ganoX = false;
     boolean ganoO = false;
+    String nombreX = "";
+    String nombreO = "";
     JLabel lbs[] = new JLabel[9];
     int vs[][] = {{1,2,3},{4,5,6},{7,8,9},{1,4,7},{2,5,8},{3,6,9},{1,5,9},{3,5,7}};
     /**
@@ -34,11 +35,15 @@ public class Board extends javax.swing.JFrame {
         if("X".equals(NewGame.icono1)){
            jLabel2.setText(NewGame.j1);
            jLabel1.setText(NewGame.j2);
+           nombreX = NewGame.j1;
+           nombreO = NewGame.j2;
         }else{
             jLabel2.setText(NewGame.j2);
             jLabel1.setText(NewGame.j1);
+            nombreX = NewGame.j2;
+            nombreO = NewGame.j1;
         }
-        jLabel24.setText(turno);
+        jLabel24.setText(nombreX);
         jLabel4.setFont(new java.awt.Font("Andalus", 1, 36));
         jLabel3.setFont(new java.awt.Font("Andalus", 1, 36));
      
@@ -106,11 +111,12 @@ public class Board extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Andalus", 1, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("1");
 
         jLabel6.setFont(new java.awt.Font("Andalus", 1, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("  Partida");
+        jLabel6.setText("Ronda");
 
         jLabel7.setText("jLabel7");
 
@@ -127,7 +133,7 @@ public class Board extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Partidas ganadas:");
+        jLabel8.setText("Rondas ganadas:");
 
         jLabel9.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -135,7 +141,7 @@ public class Board extends javax.swing.JFrame {
 
         jLabel10.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Partidas ganadas:");
+        jLabel10.setText("Rondas ganadas:");
 
         jLabel11.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
@@ -306,7 +312,7 @@ public class Board extends javax.swing.JFrame {
         jButton2.setBackground(new java.awt.Color(0, 0, 0));
         jButton2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Otra partida");
+        jButton2.setText("Siguiente ronda");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -326,74 +332,78 @@ public class Board extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jLabel21)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel22)
+                .addGap(258, 258, 258)
+                .addComponent(jButton2)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel9)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel9)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel23)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel7)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel24)
-                                .addGap(7, 7, 7)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel8))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel6)
+                        .addGap(45, 45, 45))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel21)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel22)
-                        .addGap(258, 258, 258)
-                        .addComponent(jButton2)
-                        .addGap(27, 27, 27)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel23)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel24)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(58, 58, 58)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(121, 121, 121))
+                .addGap(120, 120, 120))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel9)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel5)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel5)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel9)))
+                        .addComponent(jLabel7))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -404,11 +414,11 @@ public class Board extends javax.swing.JFrame {
                             .addComponent(jLabel4))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel23)
-                    .addComponent(jLabel24))
-                .addGap(26, 26, 26)
+                    .addComponent(jLabel24)
+                    .addComponent(jLabel23))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addGap(38, 38, 38)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel21)
                     .addComponent(jLabel22)
@@ -430,29 +440,33 @@ public class Board extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
     public void presionar(int casilla){
-        jLabel23.setForeground(Color.black);
-        jLabel24.setForeground(Color.black);
-        if(turno == "X"){
-            jLabel3.setForeground(Color.red);
-            jLabel4.setForeground(Color.white);
+        if(!hayGanador){
+            jLabel23.setForeground(Color.black);
+            jLabel24.setForeground(Color.black);
+            if(turno == "X"){
+                jLabel3.setForeground(Color.red);
+                jLabel4.setForeground(Color.white);
+            }
+            if(turno == "O"){
+                jLabel4.setForeground(Color.red);
+                jLabel3.setForeground(Color.white);
+            }
+            if(lbs[casilla-1].getText().equals("")){
+                lbs[casilla-1].setFont(new java.awt.Font("Andalus", 1, 36));
+                lbs[casilla-1].setText(turno);
+                cambiarTurno();
+                comprobarGanador();
+            }
+            if(ganoX || ganoO){
+                jLabel23.setForeground(Color.red);
+                jLabel24.setForeground(Color.red);
+                jLabel23.setText("Ganó");
+                jLabel24.setText(ganoX ? nombreX : nombreO);
+            }
         }
-        if(turno == "O"){
-            jLabel4.setForeground(Color.red);
-            jLabel3.setForeground(Color.white);
-        }
-        if(lbs[casilla-1].getText().equals("")){
-            lbs[casilla-1].setFont(new java.awt.Font("Andalus", 1, 36));
-            lbs[casilla-1].setText(turno);
-            cambiarTurno();
-            comprobarGanador();
-        }
-        if(ganoX || ganoO){
-            jLabel23.setForeground(Color.red);
-            jLabel24.setForeground(Color.red);
-            jLabel23.setText("Ganó");
-            jLabel24.setText(ganoX ? "X" : "O");
-        }
+        
     }
     public void cambiarTurno(){
         if(turno.equals("X")){
@@ -469,6 +483,7 @@ public class Board extends javax.swing.JFrame {
                 lbs[vs[i][1]-1].setBackground(Color.gray);
                 lbs[vs[i][2]-1].setBackground(Color.gray);
                 contadorX++;
+                hayGanador = true;
                 ganoX = true;
                 
             }
@@ -478,6 +493,7 @@ public class Board extends javax.swing.JFrame {
                 lbs[vs[i][1]-1].setBackground(Color.gray);
                 lbs[vs[i][2]-1].setBackground(Color.gray);
                 contadorO++;
+                hayGanador = true;
                 ganoO = true;
             }
         }
@@ -490,11 +506,14 @@ public class Board extends javax.swing.JFrame {
         }
         ganoX = false;
         ganoO = false;
+        hayGanador = false;
         contadorX = 0;
         contadorO = 0;
         contadorPartida = 1;
+        contadorEmpate = 0;
         jLabel9.setText(String.valueOf(contadorX));
         jLabel11.setText(String.valueOf(contadorO));
+        jLabel22.setText(String.valueOf(contadorEmpate));
         jLabel5.setText(String.valueOf(contadorPartida));
         double numero = Math.random();
         double roundOff = (double) Math.round(numero * 100) / 100;
@@ -508,7 +527,8 @@ public class Board extends javax.swing.JFrame {
         jLabel3.setForeground(Color.white);
         jLabel4.setForeground(Color.white);
         jLabel23.setText("Empieza");
-        jLabel24.setText(turno);
+        jLabel24.setText("X".equals(turno) ? nombreX : nombreO);
+        jButton2.setEnabled(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel14MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MousePressed
@@ -574,6 +594,7 @@ public class Board extends javax.swing.JFrame {
         }
         jLabel9.setText(String.valueOf(contadorX));
         jLabel11.setText(String.valueOf(contadorO));
+        contadorEmpate = (contadorPartida-1) - (contadorX+contadorO);
         jLabel22.setText(String.valueOf(contadorEmpate));
         jLabel5.setText(String.valueOf(contadorPartida));
         if(ganoX){
@@ -586,9 +607,34 @@ public class Board extends javax.swing.JFrame {
         jLabel3.setForeground(Color.white);
         jLabel4.setForeground(Color.white);
         jLabel23.setText("Empieza");
-        jLabel24.setText(turno);
+        jLabel24.setText("X".equals(turno) ? nombreX : nombreO);
         ganoX = false;
         ganoO = false;
+        hayGanador = false;
+        Connection_DB db = new Connection_DB();
+        if(contadorPartida == 11){
+            String ganador = "";
+            String mensaje = "";
+            if(String.valueOf(contadorX).equals(String.valueOf(contadorO))){
+                mensaje = "Despues de 10 rondas, hubo un empate";
+                db.subirResultados(nombreX, 0, 0, 1);
+                db.subirResultados(nombreO, 0, 0, 1);
+            }else{
+               ganador = contadorX > contadorO ? nombreX : nombreO;
+               if(ganador.equals(nombreO)){
+                   db.subirResultados(nombreO,1,0,0);
+                   db.subirResultados(nombreX,0,1,0);
+               }
+               else{
+                   db.subirResultados(nombreO,0,1,0);
+                   db.subirResultados(nombreX,1,0,0);
+               }
+               mensaje = "Despues de 10 rondas, el ganador es: " + ganador;
+            }
+           jButton2.setEnabled(false);
+           hayGanador = true;
+           JOptionPane.showMessageDialog(null,mensaje);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
